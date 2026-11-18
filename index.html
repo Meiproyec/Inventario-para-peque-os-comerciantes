@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#166534">
+  <meta name="description" content="Control sencillo de inventario para pequeños comerciantes.">
+  <title>Mi Inventario</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="brand-icon">▦</span><div><strong>Mi Inventario</strong><small>Control para tu negocio</small></div></div>
+  <span id="connection" class="connection">● En línea</span>
+</header>
+<main class="container">
+  <section class="welcome">
+    <div><p class="eyebrow">PANEL DE CONTROL</p><h1>Tu negocio, bajo control.</h1><p>Administra tus productos, entradas y salidas desde un solo lugar.</p></div>
+    <button id="installBtn" class="btn btn-light" hidden>＋ Instalar aplicación</button>
+  </section>
+  <section class="stats">
+    <article class="stat-card"><span>Productos registrados</span><strong id="totalProducts">0</strong><small>Tipos de productos</small></article>
+    <article class="stat-card"><span>Unidades en inventario</span><strong id="totalUnits">0</strong><small>Existencias actuales</small></article>
+    <article class="stat-card warning"><span>Existencias bajas</span><strong id="lowStock">0</strong><small>Requieren atención</small></article>
+    <article class="stat-card"><span>Valor del inventario</span><strong id="inventoryValue">$0.00</strong><small>Precio × cantidad</small></article>
+  </section>
+  <section class="panel">
+    <div class="section-heading"><div><p class="eyebrow">CATÁLOGO</p><h2>Mis productos</h2></div><button id="addBtn" class="btn btn-primary">＋ Nuevo producto</button></div>
+    <div class="filters">
+      <input id="searchInput" type="search" placeholder="Buscar producto...">
+      <select id="categoryFilter"><option value="">Todas las categorías</option></select>
+      <select id="stockFilter"><option value="">Todas las existencias</option><option value="low">Existencias bajas</option><option value="ok">Existencias suficientes</option></select>
+    </div>
+    <div class="table-wrap"><table><thead><tr><th>Producto</th><th>Categoría</th><th>Precio</th><th>Existencia</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="productsBody"></tbody></table></div>
+    <p id="emptyState" class="empty" hidden>No hay productos para mostrar. Registra tu primer producto.</p>
+  </section>
+  <section class="panel movement-panel">
+    <div class="section-heading"><div><p class="eyebrow">MOVIMIENTOS</p><h2>Registrar entrada o salida</h2></div></div>
+    <form id="movementForm" class="movement-form">
+      <label>Producto<select id="movementProduct" required><option value="">Selecciona un producto</option></select></label>
+      <label>Tipo<select id="movementType"><option value="entrada">Entrada</option><option value="salida">Salida</option></select></label>
+      <label>Cantidad<input id="movementQuantity" type="number" min="1" step="1" required placeholder="Ej. 5"></label>
+      <button class="btn btn-primary" type="submit">Guardar movimiento</button>
+    </form>
+    <p class="hint">Las entradas aumentan las existencias y las salidas las disminuyen.</p>
+    <div class="history-head"><h3>Movimientos recientes</h3><button id="clearHistory" class="text-btn" type="button">Limpiar historial</button></div>
+    <div id="historyList" class="history-list"><p class="empty">Todavía no hay movimientos registrados.</p></div>
+  </section>
+  <footer>Mi Inventario · Aplicación web progresiva para pequeños comercios</footer>
+</main>
+<dialog id="productDialog">
+  <form id="productForm" class="dialog-form">
+    <div class="dialog-heading"><div><p class="eyebrow">CATÁLOGO</p><h2 id="dialogTitle">Nuevo producto</h2></div><button type="button" id="closeDialog" class="close-btn" aria-label="Cerrar">×</button></div>
+    <input id="productId" type="hidden">
+    <label>Nombre del producto<input id="productName" required maxlength="80" placeholder="Ej. Arroz de 1 kg"></label>
+    <div class="form-grid"><label>Precio ($)<input id="productPrice" type="number" min="0" step="0.01" required placeholder="0.00"></label><label>Cantidad inicial<input id="productQuantity" type="number" min="0" step="1" required placeholder="0"></label></div>
+    <label>Categoría<input id="productCategory" required maxlength="50" placeholder="Ej. Abarrotes"></label>
+    <label>Existencia mínima<input id="productMinimum" type="number" min="0" step="1" value="5" required></label>
+    <div class="dialog-actions"><button type="button" id="cancelDialog" class="btn btn-outline">Cancelar</button><button class="btn btn-primary" type="submit">Guardar producto</button></div>
+  </form>
+</dialog>
+<script src="./app.js"></script>
+</body></html>
