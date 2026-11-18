@@ -1,0 +1,25 @@
+{
+  "name": "Mi Inventario - Pequeños Comerciantes",
+  "short_name": "Mi Inventario",
+  "description": "Control de productos, entradas y salidas para pequeños comercios.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f7f4",
+  "theme_color": "#166534",
+  "lang": "es-MX",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
